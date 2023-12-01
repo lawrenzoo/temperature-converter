@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .container{
+        text-align: center;
+        min-height: 100svh;
+        background-color: aqua;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:15px;
+    }
+    form{
+        
+        padding: 50px;
+        background-color: rgb(45, 45, 255);
+        border-radius: 15px;
+    }
+    form>h2{
+        color: white;
+    }
+    form .figures{
+        display: inline-block;
+        padding: 10px ;
+        border: none;
+    }
+    h1, h2 {
+    margin-bottom: 10px;
+    }
+    .temperature{
+        padding: 10px;
+    }
+    .figures, .temperature, .btn {
+    margin-bottom: 20px;
+    }
+    .temperature .custom-option{
+        padding: 10px;
+        background-color: #f0f0f0;
+    }
+    .btn{
+        padding: 10px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        box-shadow: darkgray 3px 3px 7px;
+    }
+    .result{
+        color: white;
+        font-size: 40px;
+
+    }
+
+    @media (max-width:1000px){
+        .container{
+        padding: 20px;
+        gap:10px;
+    }
+        h1, h2 {
+        font-size: 20px;
+    }
+    .result{
+    
+        font-size: 20px;
+    }
+    }
+    </style>
+</head>
+<body>
+   <div class="container">
+    <h1>Chiagozie Mbanusi l.</h1>
+    <form onsubmit="convertTemperature(event)">
+        <h2>Enter the Temperature To Convert</h2>
+        <input type="number" class="figures" value="0">
+        <select class="temperature">
+            <option class="custom-option" disabled selected>Select Option</option>
+            <option value="cel" class="custom-option" >Celsius</option>
+            <option value="fah" class="custom-option" >Fahrenheit</option>
+        </select>
+        <br>
+        <button type="submit" class="btn">Submit</button>
+        <br>
+        <span class="result">---</span>
+    </form>
+   </div>
+   <script>
+    function convertTemperature(event) {
+        event.preventDefault(); // Prevents the default form submission
+        // Get the input value and selected option
+        const input = document.querySelector('.figures');
+        const selectedOption = document.querySelector('.temperature');
+        const resultOutput = document.querySelector('.result');
+
+        // Convert temperature based on the selected option
+        const inputValue = parseFloat(input.value);
+        const selectedValue = selectedOption.value;
+
+        if (selectedValue !== 'cel' && selectedValue !== 'fah') {
+            alert("Please Pick between Celsius and Fahrenheit");
+            return false;
+        }
+
+        // let result;
+
+        if (selectedValue === 'cel') {
+            // Convert Celsius to Fahrenheit
+            result = ((inputValue * 9/5) + 32).toFixed(1) ;
+             resultOutput.textContent = `${result}°F`;
+            return false;
+        } else if (selectedValue === 'fah') {
+            // Convert Fahrenheit to Celsius
+            result = ((inputValue - 32) * 5/9).toFixed(1) ;
+             resultOutput.textContent = `${result}°C`;
+            return false;
+        }
+    }
+    </script>
+</body>
+</html>
